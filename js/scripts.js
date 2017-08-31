@@ -1,29 +1,30 @@
-function wypisz() {
+var numer = Math.floor(Math.random()*5)+1;
+var timer1 =0;
+var timer2 =0;
 
-var liczba1 = document.getElementById("pole1").value;
-var liczba2 = document.getElementById("pole2").value;
-var napis = "";
-var i;
+function ustawslajd(nrslajdu){
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+    numer = nrslajdu-1;
+    
+    schowaj();
+    setTimeout("zmienslajd()", 500);
+}
 
-if (liczba1<liczba2) {
-    
-    for (i=liczba1; i<=liczba2; i++)
-        {
-            napis = napis + i + " ";
-        }
-        
-    document.getElementById("wynik").innerHTML = napis;
-    }
-else if (liczba1>liczba2) {
-        
-        for (i=liczba2; i<=liczba1; i++)
-        {
-            napis = napis + i + " ";
-        }
-        
-    document.getElementById("wynik").innerHTML = napis;
-} else {
-    document.getElementById("wynik").innerHTML = "Wpisz liczby ćmolu";
+function schowaj() {
+    $("#slider").fadeOut(500);
 }
-}
+
+function zmienslajd() {
     
+    numer++; if(numer>5) numer=1;
+    
+    var plik = "<img src=\"slajdy/slajd" + numer + ".png\" />"
+    
+    document.getElementById("slider").innerHTML = plik;
+    
+    $("#slider").fadeIn(500);
+    
+    timer1 = setTimeout("zmienslajd()", 5000);
+    timer2 = setTimeout("schowaj()", 4500);
+}
